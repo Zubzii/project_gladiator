@@ -5,13 +5,23 @@ using UnityEngine;
 
 public class MoveController: MonoBehaviour
 {
+
+    private Rigidbody playerRigidBody;
+    private void Start()
+    {
+        playerRigidBody = GetComponent<Rigidbody>();
+        transform.position = new Vector3(25f, 9f, 0f);
+        
+    }
+    
     void Update()
     {
+        
         bool rightInput = Input.GetButton("Right");
         bool leftInput = Input.GetButton("Left");
         Vector3 leftSpeed = new Vector3(0,0,-5);
         Vector3 rightSpeed = new Vector3(0,0,5);
-        Rigidbody playerRigidBody = GetComponent<Rigidbody>();
+        
         Animator animator = playerRigidBody.GetComponent<Animator>();
         animator.SetBool ("isWalking",false);
 
