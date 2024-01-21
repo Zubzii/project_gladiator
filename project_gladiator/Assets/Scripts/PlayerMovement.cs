@@ -23,22 +23,22 @@ public class MoveController: MonoBehaviour
         Vector3 rightSpeed = new Vector3(0,0,5);
         
         Animator animator = playerRigidBody.GetComponent<Animator>();
-        animator.SetBool ("isWalking",false);
 
         if (rightInput == true)
         {
             playerRigidBody.transform.Translate(rightSpeed*Time.deltaTime);
-            animator.SetBool("isWalking", true);
+            animator.SetBool("isWalkingRight", true);
 
         }
         else if (leftInput == true)
         {
             playerRigidBody.transform.Translate(leftSpeed * Time.deltaTime);
-            animator.SetBool("isWalking", true);
+            animator.SetBool("isWalkingLeft", true);
         }
         else
         {
-            animator.SetBool("isWalking", false);
+            animator.SetBool("isWalkingRight", false);
+            animator.SetBool("isWalkingLeft", false);
         }
 
     }
