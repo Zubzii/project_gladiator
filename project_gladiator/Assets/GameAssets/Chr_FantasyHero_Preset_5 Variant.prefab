@@ -17,8 +17,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4938694965859136, guid: 68813e3f18422044094750f43ff6381b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938694965859136, guid: 68813e3f18422044094750f43ff6381b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938694965859136, guid: 68813e3f18422044094750f43ff6381b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938694965859136, guid: 68813e3f18422044094750f43ff6381b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -29.218548
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4938694965859136, guid: 68813e3f18422044094750f43ff6381b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26,7 +38,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4938694965859136, guid: 68813e3f18422044094750f43ff6381b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.11787
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4938694965859136, guid: 68813e3f18422044094750f43ff6381b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62,14 +74,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1608198229272546, guid: 68813e3f18422044094750f43ff6381b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -7691554879813767720}
+      addedObject: {fileID: 3140}
   m_SourcePrefab: {fileID: 100100000, guid: 68813e3f18422044094750f43ff6381b, type: 3}
 --- !u!1 &5475639826243804539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1608198229272546, guid: 68813e3f18422044094750f43ff6381b, type: 3}
   m_PrefabInstance: {fileID: 5474362622487919257}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-7691554879813767720
+--- !u!114 &3140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
