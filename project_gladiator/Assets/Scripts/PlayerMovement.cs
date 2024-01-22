@@ -28,12 +28,13 @@ public class MoveController: MonoBehaviour
         {
             playerRigidBody.transform.Translate(rightSpeed*Time.deltaTime);
             animator.SetBool("isWalkingRight", true);
-
+            animator.SetBool("isWalkingLeft", false);
         }
         else if (leftInput == true)
         {
             playerRigidBody.transform.Translate(leftSpeed * Time.deltaTime);
             animator.SetBool("isWalkingLeft", true);
+            animator.SetBool("isWalkingRight", false);
         }
         else
         {
