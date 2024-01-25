@@ -3,44 +3,58 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MoveController: MonoBehaviour
+public class Test : MonoBehaviour
 {
 
     private Rigidbody playerRigidBody;
+    Animator animator;
+    [SerializeField] float walkModifier = 15;
+
     private void Start()
     {
         playerRigidBody = GetComponent<Rigidbody>();
-        transform.position = new Vector3(25f, 9f, 0f);
-        
+        transform.position = new Vector3(5f, 9f, 0f);
+        animator = playerRigidBody.GetComponent<Animator>();
     }
-    
+
+    [SerializeField] float jumpModifier = 9000;
+    bool isTouchingGround = true;
+
     void Update()
     {
-        
-        bool rightInput = Input.GetButton("Right");
-        bool leftInput = Input.GetButton("Left");
-        Vector3 leftSpeed = new Vector3(0,0,-5);
-        Vector3 rightSpeed = new Vector3(0,0,5);
-        
-        Animator animator = playerRigidBody.GetComponent<Animator>();
+        float walkInput = Input.GetAxis("Walk");
+        Vector3 walkSpeed = new Vector3(0, 0, walkInput);
 
-        if (rightInput == true)
-        {
-            playerRigidBody.transform.Translate(rightSpeed*Time.deltaTime);
-            animator.SetBool("isWalkingRight", true);
+        playerRigidBody.MovePosition(playerRigidBody.position + walkSpeed * walkModifier * Time.deltaTime);
 
-        }
-        else if (leftInput == true)
+        animator.SetBool("isWalkingRight", walkSpeed.z > 0);
+        animator.SetBool("isWalkingLeft", walkSpeed.z < 0);
+
+        bool jumpInput = Input.GetButtonDown("Jump");
+        Debug.Log(jumpInput);
+        if (jumpInput == true && isTouchingGround == true)
         {
-            playerRigidBody.transform.Translate(leftSpeed * Time.deltaTime);
-            animator.SetBool("isWalkingLeft", true);
-        }
-        else
-        {
-            animator.SetBool("isWalkingRight", false);
-            animator.SetBool("isWalkingLeft", false);
+            Vector3 jumpSpeed = new Vector3(0, 1 * jumpModifier, 0);
+            playerRigidBody.AddForce(jumpSpeed);
         }
 
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isTouchingGround = false;
+            animator.SetBool("isJumping", true);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isTouchingGround = true;
+            animator.SetBool("isJumping", false);
+        }
     }
 
 }
