@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class Test : MonoBehaviour
     private Rigidbody playerRigidBody;
     Animator animator;
     [SerializeField] float walkModifier = 15;
+    [SerializeField] float rollModifier = 50;
 
     private void Start()
     {
@@ -31,13 +33,35 @@ public class Test : MonoBehaviour
         animator.SetBool("isWalkingLeft", walkSpeed.z < 0);
 
         bool jumpInput = Input.GetButtonDown("Jump");
-        Debug.Log(jumpInput);
         if (jumpInput == true && isTouchingGround == true)
         {
             Vector3 jumpSpeed = new Vector3(0, 1 * jumpModifier, 0);
             playerRigidBody.AddForce(jumpSpeed);
         }
 
+        bool rollInput = Input.GetButtonDown("Roll");
+        if (rollInput == true && walkInput <= 0)
+        {
+            animator.SetBool("isRollingBack", true);
+            playerRigidBody.MovePosition(playerRigidBody.position + walkSpeed * rollModifier * Time.deltaTime);
+        }
+        else if (rollInput == true && walkInput > 0)
+        {
+            animator.SetBool("isRollingForward", true);
+            playerRigidBody.MovePosition(playerRigidBody.position + walkSpeed * rollModifier * Time.deltaTime);
+        }
+        else 
+        { 
+            animator.SetBool("isRollingForward", false);
+            animator.SetBool("isRollingBack", false);
+        }
+
+        //else if (rollInput == true /*&& walkInput > 0*/)
+        //{
+        //    animator.SetBool("isRolling", true);
+        //    playerRigidBody.MovePosition(playerRigidBody.position + walkSpeed * rollModifier * Time.deltaTime);
+        //}
+        //else { animator.SetBool("isRolling", false); }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -55,6 +79,12 @@ public class Test : MonoBehaviour
             isTouchingGround = true;
             animator.SetBool("isJumping", false);
         }
+
+        if (isTouchingGround == false)
+        {
+            Debug.Log("Not touching ground");
+        }
+
     }
 
 }
